@@ -20,61 +20,65 @@ def create_routes(app: FastAPI, service):
     @app.get("/", response_class=HTMLResponse)
     async def root():
         """根路径，返回API文档链接"""
-        return """
-        <html>
-            <head>
-                <title>DDDDOCR API</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 40px; }
-                    .container { max-width: 800px; margin: 0 auto; }
-                    .header { text-align: center; margin-bottom: 40px; }
-                    .links { display: flex; justify-content: center; gap: 20px; }
-                    .link { padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-                    .link:hover { background: #0056b3; }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <div class="header">
-                        <h1>DDDDOCR API 服务</h1>
-                        <p>带带弟弟OCR通用验证码识别API服务</p>
-                    </div>
-                    <div class="links">
-                        <a href="/docs" class="link">Swagger UI 文档</a>
-                        <a href="/redoc" class="link">ReDoc 文档</a>
-                        <a href="/status" class="link">服务状态</a>
-                    </div>
-                </div>
-            </body>
-        </html>
-        """
+        return ''
+        # return """
+        # <html>
+        #     <head>
+        #         <title>DDDDOCR API</title>
+        #         <style>
+        #             body { font-family: Arial, sans-serif; margin: 40px; }
+        #             .container { max-width: 800px; margin: 0 auto; }
+        #             .header { text-align: center; margin-bottom: 40px; }
+        #             .links { display: flex; justify-content: center; gap: 20px; }
+        #             .link { padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        #             .link:hover { background: #0056b3; }
+        #         </style>
+        #     </head>
+        #     <body>
+        #         <div class="container">
+        #             <div class="header">
+        #                 <h1>DDDDOCR API 服务</h1>
+        #                 <p>带带弟弟OCR通用验证码识别API服务</p>
+        #             </div>
+        #             <div class="links">
+        #                 <a href="/docs" class="link">Swagger UI 文档</a>
+        #                 <a href="/redoc" class="link">ReDoc 文档</a>
+        #                 <a href="/status" class="link">服务状态</a>
+        #             </div>
+        #         </div>
+        #     </body>
+        # </html>
+        # """
     
     @app.post("/initialize", response_model=APIResponse)
     async def initialize(request: InitializeRequest):
         """初始化并选择加载的模型类型"""
-        try:
-            result = service.initialize(request)
-            return APIResponse(success=True, message=result["message"], data=result)
-        except Exception as e:
-            return APIResponse(success=False, message=str(e))
+        # try:
+        #     result = service.initialize(request)
+        #     return APIResponse(success=True, message=result["message"], data=result)
+        # except Exception as e:
+        #     return APIResponse(success=False, message=str(e))
+        return APIResponse(success=False, message='')
     
     @app.post("/switch-model", response_model=APIResponse)
     async def switch_model(request: SwitchModelRequest):
         """运行时切换模型配置"""
-        try:
-            result = service.switch_model(request)
-            return APIResponse(success=True, message=result["message"], data=result)
-        except Exception as e:
-            return APIResponse(success=False, message=str(e))
+        # try:
+        #     result = service.switch_model(request)
+        #     return APIResponse(success=True, message=result["message"], data=result)
+        # except Exception as e:
+        #     return APIResponse(success=False, message=str(e))
+        return APIResponse(success=False, message='')
     
     @app.post("/toggle-feature", response_model=APIResponse)
     async def toggle_feature(request: ToggleFeatureRequest):
-        """开启/关闭特定功能"""
-        try:
-            result = service.toggle_feature(request)
-            return APIResponse(success=True, message=result["message"], data=result)
-        except Exception as e:
-            return APIResponse(success=False, message=str(e))
+        # """开启/关闭特定功能"""
+        # try:
+        #     result = service.toggle_feature(request)
+        #     return APIResponse(success=True, message=result["message"], data=result)
+        # except Exception as e:
+        #     return APIResponse(success=False, message=str(e))
+        return APIResponse(success=False, message='')
     
     @app.post("/ocr", response_model=APIResponse)
     async def ocr_recognition(request: OCRRequest):
