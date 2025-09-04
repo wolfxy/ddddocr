@@ -126,13 +126,12 @@ def show_color_presets():
 def show_version():
     """显示版本信息"""
     try:
-        import ddddocr
         print("DDDDOCR 版本信息")
         print("=" * 30)
-        print(f"版本: 1.6.0")
-        print(f"作者: sml2h3")
-        print(f"项目地址: https://github.com/sml2h3/ddddocr")
-        print(f"文档地址: https://github.com/sml2h3/ddddocr/blob/master/README.md")
+        print("版本: 1.6.0")
+        print("作者: sml2h3")
+        print("项目地址: https://github.com/sml2h3/ddddocr")
+        print("文档地址: https://github.com/sml2h3/ddddocr/blob/master/README.md")
         
     except Exception as e:
         print(f"获取版本信息失败: {e}")
