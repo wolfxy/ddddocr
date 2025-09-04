@@ -92,7 +92,7 @@ def start_api_server(args):
         run_server(**server_config)
         
     except ImportError as e:
-        print(f"错误: 缺少API服务依赖，请安装: pip install fastapi uvicorn")
+        print("错误: 缺少API服务依赖，请安装: pip install fastapi uvicorn")
         print(f"详细错误: {e}")
         sys.exit(1)
     except Exception as e:

@@ -193,7 +193,8 @@ def create_app() -> FastAPI:
     # 添加MCP处理器
     mcp_handler = MCPHandler(service)
     app.include_router(mcp_handler.router, prefix="/mcp", tags=["MCP"])
-    
+    config = InitializeRequest(ocr=True, det=False)
+    service.initialize(config=config)
     return app
 
 
