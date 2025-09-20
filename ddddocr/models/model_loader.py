@@ -116,8 +116,7 @@ class ModelLoader:
         except Exception as e:
             return {'error': str(e)}
     
-    def load_ocr_model(self, old: bool = False, beta: bool = False, 
-                      import_onnx_path: str = "") -> onnxruntime.InferenceSession:
+    def load_ocr_model(self, old: bool = False, beta: bool = False, import_onnx_path: str = "") -> onnxruntime.InferenceSession:
         """
         加载OCR模型
         

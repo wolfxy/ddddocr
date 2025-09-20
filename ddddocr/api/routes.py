@@ -6,12 +6,9 @@ API路由定义
 import base64
 import time
 import traceback
-from typing import Dict, Any
-
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, HTMLResponse
-
-from .models import *
+from .models import APIResponse, InitializeRequest, SwitchModelRequest, ToggleFeatureRequest, OCRRequest, OCRResponse, DetectionRequest, DetectionResponse, SlideMatchRequest, SlideResponse, SlideComparisonRequest, StatusResponse
 
 
 def create_routes(app: FastAPI, service):
@@ -95,6 +92,8 @@ def create_routes(app: FastAPI, service):
                 image_data = base64.b64decode(request.image)
             except Exception:
                 raise HTTPException(status_code=400, detail="图片base64解码失败")
+            
+            # 检测图片的来源，如果检测到，则使用对应的模型进行解析，否则使用通用模型解析
             
             # 设置字符集范围
             if request.charset_range is not None:
