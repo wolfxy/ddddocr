@@ -93,9 +93,9 @@ class DdddOcr:
         self.slide_engine = SlideEngine()
     
     def classification(self, img: Union[bytes, str, pathlib.PurePath, Image.Image], 
-                      png_fix: bool = False, probability: bool = False,
-                      color_filter_colors: Optional[List[str]] = None,
-                      color_filter_custom_ranges: Optional[List[Tuple[Tuple[int, int, int], Tuple[int, int, int]]]] = None) -> Union[str, Dict[str, Any]]:
+                       png_fix: bool = False, probability: bool = False,
+                       color_filter_colors: Optional[List[str]] = None,
+                       color_filter_custom_ranges: Optional[List[Tuple[Tuple[int, int, int], Tuple[int, int, int]]]] = None) -> Union[str, Dict[str, Any]]:
         """
         OCR识别方法
         
@@ -148,8 +148,8 @@ class DdddOcr:
         return self.detection_engine.predict(img)
     
     def slide_match(self, target_img: Union[bytes, str, pathlib.PurePath, Image.Image],
-                   background_img: Union[bytes, str, pathlib.PurePath, Image.Image],
-                   simple_target: bool = False) -> Dict[str, Any]:
+                    background_img: Union[bytes, str, pathlib.PurePath, Image.Image],
+                    simple_target: bool = False) -> Dict[str, Any]:
         """
         滑块匹配方法
         
@@ -170,7 +170,7 @@ class DdddOcr:
         return self.slide_engine.slide_match(target_img, background_img, simple_target)
     
     def slide_comparison(self, target_img: Union[bytes, str, pathlib.PurePath, Image.Image],
-                        background_img: Union[bytes, str, pathlib.PurePath, Image.Image]) -> Dict[str, Any]:
+                         background_img: Union[bytes, str, pathlib.PurePath, Image.Image]) -> Dict[str, Any]:
         """
         滑块比较方法
         

@@ -9,6 +9,10 @@ import traceback
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from .models import APIResponse, InitializeRequest, SwitchModelRequest, ToggleFeatureRequest, OCRRequest, OCRResponse, DetectionRequest, DetectionResponse, SlideMatchRequest, SlideResponse, SlideComparisonRequest, StatusResponse
+from ..utils.ts_classifier import ImageClassifier, ImageRecognizer
+
+classifier = ImageClassifier()
+imageRecognizer = ImageRecognizer()
 
 
 def create_routes(app: FastAPI, service):
@@ -94,24 +98,31 @@ def create_routes(app: FastAPI, service):
                 raise HTTPException(status_code=400, detail="图片base64解码失败")
             
             # 检测图片的来源，如果检测到，则使用对应的模型进行解析，否则使用通用模型解析
-            
-            # 设置字符集范围
-            if request.charset_range is not None:
-                service.ocr_instance.set_ranges(request.charset_range)
-            
-            # 执行OCR识别
-            result = service.ocr_instance.classification(
-                image_data,
-                png_fix=request.png_fix,
-                probability=request.probability,
-                color_filter_colors=request.color_filter_colors,
-                color_filter_custom_ranges=request.color_filter_custom_ranges
-            )
-            
-            if request.probability:
-                response_data = OCRResponse(text=None, probability=result)
-            else:
+            image_src = classifier.classify(image_data)
+            if image_src is not None:
+                print('image_src', image_src)
+                result = imageRecognizer.recognition(image_src, image_data)
+                print('result', result)
                 response_data = OCRResponse(text=result, probability=None)
+                pass
+            else:
+                # 设置字符集范围
+                if request.charset_range is not None:
+                    service.ocr_instance.set_ranges(request.charset_range)
+                
+                # 执行OCR识别
+                result = service.ocr_instance.classification(
+                    image_data,
+                    png_fix=request.png_fix,
+                    probability=request.probability,
+                    color_filter_colors=request.color_filter_colors,
+                    color_filter_custom_ranges=request.color_filter_custom_ranges
+                )
+                
+                if request.probability:
+                    response_data = OCRResponse(text=None, probability=result)
+                else:
+                    response_data = OCRResponse(text=result, probability=None)
             
             return APIResponse(success=True, message="OCR识别成功", data=response_data.dict())
             

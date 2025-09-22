@@ -132,8 +132,7 @@ class OCREngine(BaseEngine):
             # 应用颜色过滤
             if color_filter_colors or color_filter_custom_ranges:
                 try:
-                    color_filter = ColorFilter(colors=color_filter_colors, 
-                                             custom_ranges=color_filter_custom_ranges)
+                    color_filter = ColorFilter(colors=color_filter_colors, custom_ranges=color_filter_custom_ranges)
                     pil_image = color_filter.filter_image(pil_image)
                 except Exception as e:
                     print(f"颜色过滤警告: {str(e)}，将跳过颜色过滤步骤")
@@ -150,7 +149,7 @@ class OCREngine(BaseEngine):
             
             # 执行推理
             result = self._inference(processed_image, probability)
-            
+            print('result---------', result)
             return result
             
         except Exception as e:

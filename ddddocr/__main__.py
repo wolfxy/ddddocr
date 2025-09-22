@@ -26,9 +26,7 @@ def main():
     api_parser.add_argument("--workers", type=int, default=1, help="工作进程数 (默认: 1)")
     api_parser.add_argument("--reload", action="store_true", help="启用自动重载 (开发模式)")
     api_parser.add_argument("--config", help="配置文件路径 (JSON格式)")
-    api_parser.add_argument("--log-level", default="info", 
-                           choices=["critical", "error", "warning", "info", "debug", "trace"],
-                           help="日志级别 (默认: info)")
+    api_parser.add_argument("--log-level", default="info", choices=["critical", "error", "warning", "info", "debug", "trace"], help="日志级别 (默认: info)")
     
     # 颜色过滤器信息命令
     color_parser = subparsers.add_parser("colors", help="显示可用的颜色过滤器预设")
@@ -57,7 +55,6 @@ def start_api_server(args):
     """启动API服务器"""
     try:
         from .api import run_server
-        
         # 加载配置文件
         config = {}
         if args.config:

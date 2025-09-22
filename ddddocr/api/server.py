@@ -4,17 +4,14 @@ FastAPI服务器实现
 """
 
 import time
-import base64
-import traceback
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from .models import *
+from .models import InitializeRequest, SwitchModelRequest, ToggleFeatureRequest, StatusResponse
 from .routes import create_routes
 from .mcp import MCPHandler
 
