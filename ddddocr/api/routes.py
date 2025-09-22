@@ -100,9 +100,9 @@ def create_routes(app: FastAPI, service):
             # 检测图片的来源，如果检测到，则使用对应的模型进行解析，否则使用通用模型解析
             image_src = classifier.classify(image_data)
             if image_src is not None:
-                print('image_src', image_src)
+                # print('image_src', image_src)
                 result = imageRecognizer.recognition(image_src, image_data)
-                print('result', result)
+                # print('result', result)
                 response_data = OCRResponse(text=result, probability=None)
                 pass
             else:

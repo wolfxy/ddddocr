@@ -132,16 +132,19 @@ class ImageClassifier:
 class ImageRecognizer:
 
     def __init__(self):
-        pass
+        self.model_cache = dict()
 
     def recognition(self, class_name, image):
         from .ts_ocr import DdddOcr
-        base_dir = os.path.dirname(os.path.dirname(__file__))
-        import_onnx_path = os.path.join(base_dir, 'class_model', class_name, 'vcode.onnx')
-        charsets_path = os.path.join(base_dir, 'class_model', class_name, 'charsets.json')
-        print('import_onnx_path', import_onnx_path)
-        print('charsets_path', charsets_path)
-        ocr = DdddOcr(import_onnx_path=import_onnx_path, charsets_path=charsets_path)
+        ocr: DdddOcr = self.model_cache.get(class_name)
+        if ocr is None:
+            base_dir = os.path.dirname(os.path.dirname(__file__))
+            import_onnx_path = os.path.join(base_dir, 'class_model', class_name, 'vcode.onnx')
+            charsets_path = os.path.join(base_dir, 'class_model', class_name, 'charsets.json')
+            # print('import_onnx_path', import_onnx_path)
+            # print('charsets_path', charsets_path)
+            ocr = DdddOcr(import_onnx_path=import_onnx_path, charsets_path=charsets_path)
+            self.model_cache[class_name] = ocr
         image = Image.open(BytesIO(image))
         result = ocr.classification(img=image)
         return result

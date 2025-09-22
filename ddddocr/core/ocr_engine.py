@@ -149,7 +149,6 @@ class OCREngine(BaseEngine):
             
             # 执行推理
             result = self._inference(processed_image, probability)
-            print('result---------', result)
             return result
             
         except Exception as e:
