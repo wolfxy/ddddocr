@@ -68,6 +68,8 @@ class DDDDOCRService:
             self.slide_instance = ddddocr.DdddOcr(ocr=False, det=False, show_ad=False)
             self.enabled_features.add("slide")
             
+            print("服务初始化成功")
+
             return {
                 "loaded_models": list(self.enabled_features),
                 "message": "服务初始化成功"
