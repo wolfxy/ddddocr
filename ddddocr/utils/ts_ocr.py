@@ -2669,7 +2669,7 @@ class DdddOcr(object):
                                 probability_result_index.append(-1)
                         probability_result = []
                         for item in ort_outs_probability:
-                            probability_result.append([item[i] if i != -1 else -1 for i in probability_result_index ])
+                            probability_result.append([item[i] if i != -1 else -1 for i in probability_result_index])
                         result['probability'] = probability_result
                     return result
                 else:
